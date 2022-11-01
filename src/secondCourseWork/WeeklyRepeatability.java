@@ -1,14 +1,13 @@
 package secondCourseWork;
 
+
 import java.time.LocalDate;
 
-public class WeeklyRepeatability extends Repeatability{
+public class WeeklyRepeatability implements Repeatable{
+
     @Override
-    public LocalDate showRepeatability() {
-        return getLocalDateTime().plusWeeks(1);
+    public LocalDate showRepeatability(LocalDate localDate) {
+        return localDate.plusWeeks(1);
     }
-    @Override
-    public String getDataString() {
-        return getLocalDateTime().plusWeeks(1).format(getFormatter());
-    }
+
 }

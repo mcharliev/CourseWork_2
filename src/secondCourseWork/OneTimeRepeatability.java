@@ -1,15 +1,11 @@
 package secondCourseWork;
 
+
 import java.time.LocalDate;
 
-public class OneTimeRepeatability extends Repeatability {
+public class OneTimeRepeatability implements Repeatable {
     @Override
-    public LocalDate showRepeatability() {
-        return getLocalDateTime();
-    }
-
-    @Override
-    public String getDataString() {
-        return getDataString();
+    public LocalDate showRepeatability(LocalDate localDate) {
+        return localDate;
     }
 }

@@ -1,42 +1,48 @@
 package secondCourseWork;
 
+import java.time.LocalDate;
+
 public class Task {
     private String titleOfTask;
-    private String typeOfTask;
+    private TypeOfTask typeOfTask;
     private String descriptionOfTask;
-    Repeatability repeatability;
-    public static int id = 1;
+    private Repeatable repeatability;
+    private static int count = 1;
+    private int id = count;
+    private LocalDate localDate;
 
 
     public Task(String titleOfTask,
                 String descriptionOfTask,
-                String typeOfTask,
-                Repeatability repeatability
+                TypeOfTask typeOfTask,
+                LocalDate localDate,
+                Repeatable repeatability
     ) {
-        if (titleOfTask.isEmpty() || titleOfTask == null) {
+        if (titleOfTask == null || titleOfTask.isEmpty()) {
             throw new RuntimeException("Title of task is unknown");
         } else {
             this.titleOfTask = titleOfTask;
         }
-        if (typeOfTask == null || typeOfTask.isEmpty()) {
+        if (typeOfTask == null || typeOfTask == null) {
             throw new RuntimeException("Type of task is unknown");
         } else {
             this.typeOfTask = typeOfTask;
         }
-        if (descriptionOfTask.isEmpty() || descriptionOfTask == null) {
+        if (descriptionOfTask == null || descriptionOfTask.isEmpty()) {
             throw new RuntimeException("Description of task is unknown");
         } else {
             this.descriptionOfTask = descriptionOfTask;
         }
+        this.localDate = localDate;
         this.repeatability = repeatability;
-        id++;
+        count++;
     }
 
-    public Repeatability getRepeatability() {
+    public Repeatable getRepeatability() {
         return repeatability;
     }
 
-    public void setRepeatability(Repeatability repeatability) {
+    public void setRepeatability(Repeatable repeatability) {
         this.repeatability = repeatability;
     }
 
@@ -48,11 +54,11 @@ public class Task {
         this.titleOfTask = titleOfTask;
     }
 
-    public String getTypeOfTask() {
+    public TypeOfTask getTypeOfTask() {
         return typeOfTask;
     }
 
-    public void setTypeOfTask(String typeOfTask) {
+    public void setTypeOfTask(TypeOfTask typeOfTask) {
         this.typeOfTask = typeOfTask;
     }
 
@@ -64,20 +70,24 @@ public class Task {
         this.descriptionOfTask = descriptionOfTask;
     }
 
-    public static int getId() {
-        return id;
+    public static int getCount() {
+        return count;
     }
 
-    public static void setId(int id) {
-        Task.id = id;
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     @Override
     public String toString() {
         return "titleOfTask: " + titleOfTask +
-                ", typeOfTask: " + typeOfTask +
+                ", typeOfTask: " + typeOfTask.getRepresentation() +
                 ", descriptionOfTask: " + descriptionOfTask +
-                "," + repeatability;
+                ", time of task: " + localDate;
     }
 
     @Override
@@ -87,13 +97,16 @@ public class Task {
 
         Task task = (Task) o;
 
+        if (id != task.id) return false;
         if (getTitleOfTask() != null ? !getTitleOfTask().equals(task.getTitleOfTask()) : task.getTitleOfTask() != null)
             return false;
         if (getTypeOfTask() != null ? !getTypeOfTask().equals(task.getTypeOfTask()) : task.getTypeOfTask() != null)
             return false;
         if (getDescriptionOfTask() != null ? !getDescriptionOfTask().equals(task.getDescriptionOfTask()) : task.getDescriptionOfTask() != null)
             return false;
-        return getRepeatability() != null ? getRepeatability().equals(task.getRepeatability()) : task.getRepeatability() == null;
+        if (getRepeatability() != null ? !getRepeatability().equals(task.getRepeatability()) : task.getRepeatability() != null)
+            return false;
+        return getLocalDate() != null ? getLocalDate().equals(task.getLocalDate()) : task.getLocalDate() == null;
     }
 
     @Override
@@ -102,6 +115,8 @@ public class Task {
         result = 31 * result + (getTypeOfTask() != null ? getTypeOfTask().hashCode() : 0);
         result = 31 * result + (getDescriptionOfTask() != null ? getDescriptionOfTask().hashCode() : 0);
         result = 31 * result + (getRepeatability() != null ? getRepeatability().hashCode() : 0);
+        result = 31 * result + id;
+        result = 31 * result + (getLocalDate() != null ? getLocalDate().hashCode() : 0);
         return result;
     }
 }

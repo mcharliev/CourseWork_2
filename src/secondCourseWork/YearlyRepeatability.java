@@ -1,14 +1,12 @@
 package secondCourseWork;
 
+
 import java.time.LocalDate;
 
-public class YearlyRepeatability extends Repeatability{
+public class YearlyRepeatability implements Repeatable{
+
     @Override
-    public LocalDate showRepeatability() {
-        return getLocalDateTime().plusYears(1);
-    }
-    @Override
-    public String getDataString() {
-        return getLocalDateTime().plusYears(1).format(getFormatter());
+    public LocalDate showRepeatability(LocalDate localDate) {
+        return localDate.plusYears(1);
     }
 }
