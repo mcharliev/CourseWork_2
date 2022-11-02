@@ -1,12 +1,13 @@
 package secondCourseWork;
 
+import java.time.DateTimeException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        Notebook notebook = new Notebook();
-        try (Scanner scanner = new Scanner(System.in)) {
+    public static void main(String[] args) {
+        NotebookService notebook = new NotebookService();
+        try( Scanner scanner = new Scanner(System.in)) {
             label:
             while (true) {
                 printMenu();
@@ -18,10 +19,10 @@ public class Main {
                             notebook.inputTask(scanner);
                             break;
                         case 2:
-                            notebook.removeTask(scanner);
+                            notebook.deleteTask(scanner);
                             break;
                         case 3:
-                            notebook.printTaskOfDate(scanner);
+                            notebook.getTaskOfDate(scanner);
                             break;
                         case 4:
                             notebook.printAllTasks();
@@ -34,6 +35,12 @@ public class Main {
                     System.out.println("Выберите пункт меню из списка!");
                 }
             }
+        } catch (DateTimeException dateTimeException) {
+            System.out.println("Дата введена не верно, " +
+                    "обратите внимание на образец ввода" +
+                    " dd-MM-yyyy");
+        } catch (InvalidDataOfTask invalidDataOfTask) {
+            System.out.println(invalidDataOfTask.getMessage());
         }
     }
 

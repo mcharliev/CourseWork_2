@@ -7,7 +7,7 @@ public class Task {
     private TypeOfTask typeOfTask;
     private String descriptionOfTask;
     private Repeatable repeatability;
-    private static int count = 1;
+    private static int count;
     private int id = count;
     private LocalDate localDate;
 
@@ -36,6 +36,15 @@ public class Task {
         this.localDate = localDate;
         this.repeatability = repeatability;
         count++;
+    }
+
+
+    public  int getCount() {
+        return count;
+    }
+
+    public  void setCount(int count) {
+        Task.count = count;
     }
 
     public Repeatable getRepeatability() {
@@ -68,10 +77,6 @@ public class Task {
 
     public void setDescriptionOfTask(String descriptionOfTask) {
         this.descriptionOfTask = descriptionOfTask;
-    }
-
-    public static int getCount() {
-        return count;
     }
 
     public LocalDate getLocalDate() {
